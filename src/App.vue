@@ -8,24 +8,19 @@
       <v-list dense> </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar
-      :clipped-left="$vuetify.breakpoint.lgAndUp"
-      app
-      color="blue darken-3"
-      dark
-    >
+    <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
         <span class="hidden-sm-and-down">Mini Mindmap</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>mdi-apps</v-icon>
+      <v-btn icon @click="toogleTheme()">
+        <v-icon>mdi-theme-light-dark</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
       <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center"> </v-row>
+        <router-view />
       </v-container>
     </v-main>
     <v-btn bottom color="pink" dark fab fixed right @click="dialog = !dialog">
@@ -38,7 +33,7 @@
 <script>
 export default {
   props: {
-    source: String,
+    source: String
   },
   data: () => ({
     dialog: false,
@@ -52,7 +47,7 @@ export default {
         'icon-alt': 'mdi-chevron-down',
         text: 'Labels',
         model: true,
-        children: [{ icon: 'mdi-plus', text: 'Create label' }],
+        children: [{ icon: 'mdi-plus', text: 'Create label' }]
       },
       {
         icon: 'mdi-chevron-up',
@@ -64,15 +59,20 @@ export default {
           { text: 'Export' },
           { text: 'Print' },
           { text: 'Undo changes' },
-          { text: 'Other contacts' },
-        ],
+          { text: 'Other contacts' }
+        ]
       },
       { icon: 'mdi-cog', text: 'Settings' },
       { icon: 'mdi-message', text: 'Send feedback' },
       { icon: 'mdi-help-circle', text: 'Help' },
       { icon: 'mdi-cellphone-link', text: 'App downloads' },
-      { icon: 'mdi-keyboard', text: 'Go to the old version' },
-    ],
+      { icon: 'mdi-keyboard', text: 'Go to the old version' }
+    ]
   }),
+  methods: {
+    toogleTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+    }
+  }
 }
 </script>
