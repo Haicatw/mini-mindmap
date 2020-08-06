@@ -5,12 +5,13 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import VueKonva from 'vue-konva'
 
+Vue.use(VueKonva)
+
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
   vuetify,
-  VueKonva,
-  render: (h) => h(App),
+  render: h => h(App)
 }).$mount('#app')
