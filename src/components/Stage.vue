@@ -26,7 +26,16 @@ export default {
   mounted() {
     const selector = '#konva-stage'
     const selectedStage = document.querySelector(selector).parentElement
-    this.configKonva.width = selectedStage.clientWidth
+    this.configKonva.width =
+      selectedStage.clientWidth -
+      window
+        .getComputedStyle(selectedStage, null)
+        .getPropertyValue('padding-left')
+        .match(/\d+/)[0] -
+      window
+        .getComputedStyle(selectedStage, null)
+        .getPropertyValue('padding-right')
+        .match(/\d+/)[0]
     this.configKonva.height =
       selectedStage.clientHeight -
       window
